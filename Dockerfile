@@ -1,18 +1,18 @@
 FROM debian:buster
 
-LABEL arch="armhf|armv7|aarch64|amd64|i386"
+LABEL arch="armv7|amd64"
 
 MAINTAINER Sébastien Piller <me@sebpiller.ch>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends default-jdk && \
+    apt-get install -y --no-install-recommends default-jre-headless && \
     apt-get install -y --no-install-recommends bluetooth blueman bluez
 
 # Copy data for add-on
-COPY run.sh /
-RUN chmod a+x /run.sh
+#COPY run.sh /
+#RUN chmod a+x /run.sh
 
 COPY bin/luke-roberts-lamp-f-cli-LATEST.jar /
 
