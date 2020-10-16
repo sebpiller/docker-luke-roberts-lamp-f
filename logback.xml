@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="noop" class="ch.qos.logback.core.helpers.NOPAppender"/>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <file>/var/log/luke-roberts/lamp-f-cli.log</file>
+        <encoder>
+            <pattern>%d{dd.MM.yyyy. HH:mm:ss} %level [%thread] %logger{20} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <encoder>
+            <pattern>%-4r [%t] %-5p %c - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="WARN" additivity="false">
+        <!-- log nothing by default -->
+        <appender-ref ref="noop" />
+    </root>
+
+    <!-- enable log for ch.sebpiller -->
+    <logger name="ch.sebpiller" level="DEBUG" additivity="false">
+        <appender-ref ref="file" />
+        <appender-ref ref="console" />
+    </logger>
+</configuration>
